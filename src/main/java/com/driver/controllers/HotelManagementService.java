@@ -60,6 +60,7 @@ public class HotelManagementService {
         Optional<Hotel> op3=HotelManagementRepository.getHotelByName(hotelName);
         List<Facility> facilityList=op3.get().getFacilities();
         for(Facility x: newFacilities){
+            if(facilityList.contains(x){continue;}
             facilityList.add(x);
         }
         op3.get().setFacilities(facilityList);
