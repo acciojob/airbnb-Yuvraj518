@@ -46,7 +46,7 @@ public class HotelManagementService {
             HotelManagementRepository.bookARoom(booking);
             Optional<Hotel> op2=HotelManagementRepository.getHotelByName(booking.getHotelName());
             booking.setAmountToBePaid((op2.get().getPricePerNight())*(booking.getNoOfRooms()));
-            return booking.getAmountTobePaid();
+            return booking.getAmountToBePaid();
         }
         return -1;
     }
