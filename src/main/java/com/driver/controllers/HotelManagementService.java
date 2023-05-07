@@ -15,11 +15,11 @@ import java.util.UUID;
 public class HotelManagementService {
     public static String addHotel(Hotel hotel) {
         Optional<Hotel> op1=HotelManagementRepository.getHotelByName(hotel.getHotelName());
-        if(op1.isEmpty()) {
-            HotelManagementRepository.addHotel(hotel);
-            return "SUCCESS";
+        if(op1.isPresent() || hotel==null || hotel.getHotelName()==null) {
+            return "FAILURE";
         }
-        return "FAILURE";
+        HotelManagementRepository.addHotel(hotel);
+        return "SUCCESS";
     }
 
     public static Integer addUser(User user) {
@@ -40,12 +40,13 @@ public class HotelManagementService {
 
     public static int bookARoom(Booking booking) {
         int noOfRoomsAvailable=HotelManagementRepository.getNoOfRoom(booking.getHotelName());
-        if(booking.getNoOfRooms()>=noOfRoomsAvailable){
+        if(noOfRoomsAvailable>=booking.getNoOfRooms()){
             String bookingIID= String.valueOf(UUID.randomUUID());
             booking.setBookingId(bookingIID);
             HotelManagementRepository.bookARoom(booking);
             Optional<Hotel> op2=HotelManagementRepository.getHotelByName(booking.getHotelName());
-            return ((op2.get().getPricePerNight())*(booking.getNoOfRooms()));
+            booking.setAmountToBePaid((op2.get().getPricePerNight())*(booking.getNoOfRooms()));
+            return booking.getAmountTobePaid();
         }
         return -1;
     }
