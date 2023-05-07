@@ -64,6 +64,7 @@ public class HotelManagementService {
             facilityList.add(x);
         }
         op3.get().setFacilities(facilityList);
+        HotelManagementRepository.addHotel(op3.get());
         return op3.get();
     }
 }
