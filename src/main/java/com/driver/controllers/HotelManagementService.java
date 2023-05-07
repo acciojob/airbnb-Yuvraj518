@@ -14,8 +14,9 @@ import java.util.UUID;
 @Service
 public class HotelManagementService {
     public static String addHotel(Hotel hotel) {
+        if(hotel==null || hotel.getHotelName()==null){return "";}
         Optional<Hotel> op1=HotelManagementRepository.getHotelByName(hotel.getHotelName());
-        if(op1.isPresent() || hotel==null || hotel.getHotelName()==null) {
+        if(op1.isPresent()) {
             return "FAILURE";
         }
         HotelManagementRepository.addHotel(hotel);
