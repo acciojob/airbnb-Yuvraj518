@@ -53,6 +53,6 @@ public class HotelManagementRepository {
         if(bookingMap.containsKey(aadharCard)){
             return bookingMap.get(aadharCard).size();
         }
-        return -1;
+        return 0;
     }
 }
